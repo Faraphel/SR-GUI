@@ -147,8 +147,8 @@ class SRGUI():
                     t1 = time.time()
                     type2func[type]()
                     t2 = time.time()
-                except: self.label["bil"].config(text="Erreur", fg="red")
-                else: self.label["bil"].config(text="Temps de calcul : %0.2fs" % (t2 - t1), fg="gray")
+                except: self.label[type].config(text="Erreur", fg="red")
+                else: self.label[type].config(text="Temps de calcul : %0.2fs" % (t2 - t1), fg="gray")
 
         thfunc = Thread(target=thread_func)
         thfunc.setDaemon(True)

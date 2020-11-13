@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter.filedialog import askopenfilename
-from tkinter.messagebox import showerror
 import os, subprocess, shutil, glob, time
 from PIL import Image, ImageTk
 from threading import Thread
@@ -8,6 +7,7 @@ from threading import Thread
 class SRGUI():
     def __init__(self):
         self.root = Tk()
+        self.root.title("SR-GUI")
 
         self.input_img_path = StringVar()
 
@@ -25,7 +25,7 @@ class SRGUI():
         self.frame_input.grid(row=1, column=1, rowspan=2)
 
         Label(self.frame_input, text="Entrée", font=("Purisa", 18)).grid(row=1, column=1, columnspan=2)
-        self.canvas["input"] = Canvas(self.frame_input, relief=SOLID, borderwidth=2, width=400, height=400)
+        self.canvas["input"] = Canvas(self.frame_input, relief=SOLID, width=400, height=400, borderwidth = 2, highlightbackground="cyan")
         self.canvas["input"].grid(row=2, column=1, columnspan=2)
         Entry(self.frame_input, textvariable=self.input_img_path, width=60).grid(row=3, column=1, sticky="NEWS")
 
@@ -114,7 +114,7 @@ class SRGUI():
         self.frame_original = Frame(self.root)
 
         Label(self.frame_original, text="Original", font=("Purisa", 18)).grid(row=1, column=1)
-        self.canvas["original"] = Canvas(self.frame_original, relief=SOLID, borderwidth=2, width=400, height=400)
+        self.canvas["original"] = Canvas(self.frame_original, relief=SOLID, borderwidth=2, width=400, height=400, highlightbackground="red")
         self.canvas["original"].grid(row=2, column=1)
 
 
@@ -135,9 +135,6 @@ class SRGUI():
 
                 self.frame_original.grid(row=1, column=5, rowspan=2)
             else: self.frame_original.grid_forget()
-
-
-        else: showerror("Erreur", "Ce fichier n'existe pas.")
 
     def calcul(self):
         def thread_func():
